@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Feliz Navidad 🎄</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Mountains+of+Christmas:wght@700&display=swap">
+<style>
+:root{--ink:#1b1f3b;--red:#e5484d;--gold:#ffd23f;--paper:#fff6e0;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;background:linear-gradient(#22327a,#4a5bb5);color:var(--ink);font:16px 'Patrick Hand','Comic Sans MS',cursive;overflow-x:hidden}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:6}
+#isl{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translateX(-50%);z-index:30;background:#3fb86f;border:3px solid #000;border-radius:20px;height:34px;width:118px;overflow:hidden;cursor:pointer;transition:width .5s cubic-bezier(.2,1.3,.3,1),height .5s cubic-bezier(.2,1.3,.3,1),border-radius .5s;font:700 13px -apple-system,Arial,sans-serif;color:#06240f}
+#isl.on{width:220px}
+#isl.big{width:min(300px,90vw);height:92px;border-radius:30px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:28px;white-space:nowrap}
+.top span,.eq,.ctl{opacity:0;transition:opacity .3s .2s}
+.on .top span,.on .eq,.big .ctl{opacity:1}
+.eq{display:flex;gap:3px;align-items:center;height:18px}
+.eq b{width:3px;border-radius:3px;background:#000;height:4px;animation:eq .9s infinite ease-in-out}
+.eq b:nth-child(2){animation-delay:.25s}.eq b:nth-child(3){animation-delay:.1s}.eq b:nth-child(4){animation-delay:.35s}.eq b:nth-child(5){animation-delay:.15s}
+.paused .eq b{animation-play-state:paused;height:4px}
+@keyframes eq{50%{height:18px}}
+.ctl{display:flex;justify-content:center;gap:18px;padding-top:6px}
+.ctl button{width:44px;height:44px;border-radius:50%;border:3px solid #000;background:#fff;display:grid;place-items:center;cursor:pointer}
+.ctl button.act{background:var(--gold)}
+.ctl svg{width:20px;height:20px;fill:#000}
+#scene{position:fixed;inset:0;z-index:1;pointer-events:none}
+#scene svg{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:max(100%,640px)}
+.bulb{animation:bl 1.5s infinite}.bulb:nth-child(2n){animation-delay:.6s}
+@keyframes bl{50%{opacity:.3}}
+.star{transform-box:fill-box;transform-origin:center;animation:sp 3s infinite}
+@keyframes sp{50%{transform:scale(1.2) rotate(18deg)}}
+#cover{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(#22327a,#4a5bb5);text-align:center;padding:24px;color:#fff;font-size:18px;transition:opacity .8s,visibility .8s}
+#cover.hide{opacity:0;visibility:hidden}
+#cover h1{font:700 32px 'Mountains of Christmas','Patrick Hand',cursive;text-shadow:3px 3px 0 var(--ink)}
+.env{font-size:80px;animation:wob 2.4s infinite;filter:drop-shadow(4px 5px 0 var(--ink))}
+@keyframes wob{50%{transform:translateY(-14px) rotate(6deg)}}
+.btn{font:20px 'Patrick Hand','Comic Sans MS',cursive;background:var(--red);color:#fff;border:3px solid var(--ink);border-radius:16px 22px 14px 24px;padding:8px 22px;cursor:pointer;box-shadow:4px 5px 0 var(--ink)}
+.btn:active{transform:translate(3px,4px);box-shadow:1px 1px 0 var(--ink)}
+main{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:70px 14px 110px}
+.book{position:relative;width:min(330px,92vw);aspect-ratio:3/2;cursor:pointer;opacity:0;-webkit-tap-highlight-color:transparent}
+.show .book{animation:pop .9s .2s both cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{opacity:0;transform:translateY(40px) scale(.6) rotate(-6deg)}to{opacity:1;transform:none}}
+.spread{position:absolute;inset:0;perspective:1100px;transition:transform .7s ease-in,opacity .5s .1s}
+.pg,.face{padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:3px solid var(--ink);background:radial-gradient(rgba(27,31,59,.07) 1.5px,transparent 1.5px) 0 0/14px 14px,var(--paper)}
+.pg{position:absolute;top:0;width:50%;height:100%;z-index:1}
+.L{left:0;border-radius:14px 0 0 14px;border-right-width:1px;box-shadow:0 6px 0 var(--ink)}
+.R{left:50%;border-radius:0 14px 14px 0;border-left-width:1px;box-shadow:5px 6px 0 var(--ink)}
+.leaf{position:absolute;left:50%;top:0;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.5,0,.2,1);z-index:2}
+.flip .leaf{transform:rotateY(-180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:0 14px 14px 0;box-shadow:5px 6px 0 var(--ink)}
+.bk{transform:rotateY(180deg)}
+.face p,.pg p{font-size:16px;line-height:1.3;margin-top:6px}
+h3{font:700 22px/1.1 'Mountains of Christmas','Patrick Hand',cursive;color:var(--red);text-shadow:1px 1px 0 var(--ink)}
+.im{position:relative;width:100%;height:100%;border:3px solid var(--ink);border-radius:10px;overflow:hidden;display:grid;place-items:center;font-size:44px;background:#ffe9b0}
+.im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cv{position:absolute;left:25%;top:0;width:50%;height:100%;background:var(--red);color:#fff;border:3px solid var(--ink);border-radius:6px 14px 14px 6px;box-shadow:5px 6px 0 var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font:700 24px/1.1 'Mountains of Christmas','Patrick Hand',cursive;text-shadow:2px 2px 0 var(--ink);opacity:0;transform:scale(.3) rotate(10deg);transition:transform .7s .35s cubic-bezier(.2,1.6,.4,1),opacity .4s .35s;pointer-events:none}
+.cv::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:3px;background:var(--ink);opacity:.5}
+.cv i{font-style:normal;font-size:40px}
+.closed .cv{opacity:1;transform:none}
+.closed .spread{transform:scaleX(.5) scale(.85) rotate(-8deg);opacity:0;pointer-events:none}
+#hint{color:#fff;text-shadow:1px 1px 0 var(--ink);font-size:15px}
+.wish{opacity:0}
+.show .wish,.show #hint{animation:fade .7s 1.4s both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+#toast{position:fixed;left:50%;top:42%;z-index:50;transform:translate(-50%,-50%) scale(0);background:var(--gold);border:4px solid var(--ink);border-radius:24px;padding:14px 24px;font:700 32px 'Mountains of Christmas','Patrick Hand',cursive;text-align:center;box-shadow:7px 8px 0 var(--ink);transition:transform .5s cubic-bezier(.2,1.5,.4,1);pointer-events:none;width:max-content;max-width:90vw}
+#toast.on{transform:translate(-50%,-50%) scale(1) rotate(-3deg)}
+#yt{position:fixed;width:2px;height:2px;opacity:.01;pointer-events:none;border:0;left:0;bottom:0}
+</style></head>
+<body>
+<div id="isl" class="paused"><div class="top"><span>🎄 Feliz Navidad</span><div class="eq"><b></b><b></b><b></b><b></b><b></b></div></div>
+<div class="ctl"><button id="pl" aria-label="Reproducir"><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg></button><button id="pa" aria-label="Pausar"><svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button></div></div>
+
+<div id="scene"><svg viewBox="0 0 640 560" preserveAspectRatio="xMidYMax meet" stroke="#1b1f3b" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<circle cx="540" cy="90" r="38" fill="#fff3b0"/><circle cx="555" cy="80" r="30" fill="#4a5bb5" stroke="none"/>
+<path d="M-20 470Q120 400 260 450T520 440T700 450V580H-20Z" fill="#e9f2ff"/><path d="M-20 510Q160 470 320 505T660 495V580H-20Z" fill="#fff"/>
+<rect x="295" y="470" width="50" height="60" fill="#8a5a33"/>
+<polygon points="320,170 410,290 230,290" fill="#2e9b5a"/><polygon points="320,240 440,370 200,370" fill="#35ad65"/><polygon points="320,320 470,470 170,470" fill="#3fb86f"/>
+<g class="star"><polygon points="320,115 332,150 368,150 339,171 350,206 320,185 290,206 301,171 272,150 308,150" fill="#ffd23f"/></g>
+<g id="bulbs"></g>
+<rect x="130" y="500" width="48" height="40" fill="#e5484d"/><rect x="148" y="500" width="12" height="40" fill="#ffd23f"/>
+<rect x="470" y="505" width="42" height="36" fill="#4aa8ff"/><rect x="486" y="505" width="10" height="36" fill="#fff"/>
+</svg></div>
+
+<canvas id="snow"></canvas>
+
+<div id="cover"><div class="env">💌</div><h1>Tienes una carta navideña</h1><p>Tócala para abrirla ✨</p><button class="btn" id="open">Abrir carta</button></div>
+
+<main id="main">
+<div class="book" id="book">
+ <div class="spread">
+  <div class="pg L"><div class="im">🎄<img referrerpolicy="no-referrer" alt="" onerror="this.style.display='none'" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFj7Kwi2BUgc47tCpMohrRTvD5DXP7d5ppuYgXv1TU1g&amp;s=10"></div></div>
+  <div class="pg R"><div class="im">🎁<img referrerpolicy="no-referrer" alt="" onerror="this.style.display='none'" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSysnDrId8nMzKDW8UfUOVlkzXSGHP5ozshBbDeynmBMA&amp;s=10"></div></div>
+  <div class="leaf">
+   <div class="face"><h3>¡Feliz Navidad!</h3><p>Que esta Navidad llegue con paz, risas y mucho amor a tu hogar.</p></div>
+   <div class="face bk"><h3>Gracias ❤</h3><p>Por estar en mi vida. ¡Te quiero mucho!</p></div>
+  </div>
+ </div>
+ <div class="cv"><i>🎄</i>Feliz<br>Navidad</div>
+</div>
+<small id="hint">Toca la página derecha 👉</small>
+<button class="btn wish" id="wish">🎅 Desear feliz navidad</button>
+</main>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},NS='http://www.w3.org/2000/svg';
+var cols=['#e5484d','#ffd23f','#4aa8ff','#ff8fd0','#fff'];
+[[320,205],[290,262],[350,268],[262,335],[320,320],[380,338],[225,420],[290,405],[350,415],[415,425],[320,455]].forEach(function(p,i){
+ var c=document.createElementNS(NS,'circle');c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',9);c.setAttribute('stroke-width',3.5);c.setAttribute('fill',cols[i%5]);c.setAttribute('class','bulb');$('bulbs').appendChild(c)});
+var cv=$('snow'),ctx=cv.getContext('2d'),W,H,fl=[];
+function sz(){W=cv.width=innerWidth;H=cv.height=innerHeight}sz();addEventListener('resize',sz);
+for(var i=0;i<90;i++)fl.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*3+1.5,v:Math.random()+.6,d:Math.random()*6.28});
+(function dr(){ctx.clearRect(0,0,W,H);ctx.fillStyle='#fff';ctx.strokeStyle='rgba(27,31,59,.55)';ctx.lineWidth=1.5;
+ fl.forEach(function(f){f.y+=f.v;f.d+=.012;f.x+=Math.sin(f.d)*.7;if(f.y>H+6){f.y=-6;f.x=Math.random()*W}ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,7);ctx.fill();ctx.stroke()});
+ requestAnimationFrame(dr)})();
+var bk=$('book'),s=0,hints=['Toca la página derecha 👉','Toca la derecha para cerrar 👉','Toca el libro para abrirlo 📖'];
+bk.onclick=function(e){
+ var r=bk.getBoundingClientRect(),right=e.clientX-r.left>r.width/2;
+ if(s==2)s=0;else if(right)s++;else if(s==1)s=0;
+ bk.classList.toggle('flip',s==1||s==2&&bk.classList.contains('flip'));
+ if(s==0)bk.classList.remove('flip');
+ bk.classList.toggle('closed',s==2);$('hint').textContent=hints[s]};
+var isl=$('isl'),yt=null;
+function cmd(f){try{yt.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:''}),'*')}catch(e){}}
+function setP(p){isl.classList.toggle('paused',!p);$('pl').classList.toggle('act',p);$('pa').classList.toggle('act',!p)}
+$('open').onclick=function(){
+ $('cover').classList.add('hide');$('main').classList.add('show');
+ yt=document.createElement('iframe');yt.id='yt';yt.allow='autoplay; encrypted-media';
+ yt.src='https://www.youtube.com/embed/aAkMkVFwAoo?autoplay=1&loop=1&playlist=aAkMkVFwAoo&enablejsapi=1&playsinline=1';
+ document.body.appendChild(yt);setP(true);isl.classList.add('on')};
+isl.onclick=function(){if(yt)isl.classList.toggle('big')};
+$('pl').onclick=function(e){e.stopPropagation();if(yt){cmd('playVideo');setP(true)}};
+$('pa').onclick=function(e){e.stopPropagation();if(yt){cmd('pauseVideo');setP(false)}};
+var t=document.createElement('div');t.id='toast';t.innerHTML='¡Feliz Navidad!<br>🎄🎉';document.body.appendChild(t);
+var cc=document.createElement('canvas');cc.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:45';document.body.appendChild(cc);
+var cx=cc.getContext('2d'),ps=[],run=false,tm;
+function step(){cx.clearRect(0,0,cc.width,cc.height);ps=ps.filter(function(p){return p.l>0&&p.y<cc.height+20});
+ ps.forEach(function(p){p.vy+=.25;p.vx*=.985;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.l-=.004;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.strokeStyle='#1b1f3b';cx.lineWidth=1.5;cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);cx.strokeRect(-p.w/2,-p.h/2,p.w,p.h);cx.restore()});
+ if(ps.length)requestAnimationFrame(step);else run=false}
+$('wish').onclick=function(){cc.width=innerWidth;cc.height=innerHeight;
+ for(var i=0;i<140;i++){var a=Math.random()*6.28,s2=Math.random()*9+4;ps.push({x:innerWidth/2,y:innerHeight*.45,vx:Math.cos(a)*s2,vy:Math.sin(a)*s2-5,w:Math.random()*9+5,h:Math.random()*6+4,c:cols[i%5],r:0,vr:(Math.random()-.5)*.4,l:1})}
+ if(!run){run=true;step()}t.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){t.classList.remove('on')},2600)};
+})();
+</script></body></html>
